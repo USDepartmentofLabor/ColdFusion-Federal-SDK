@@ -1,0 +1,173 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML> 
+<HEAD> 
+<TITLE>U.S. Department of Labor -- The Department of Labor Developer Community</TITLE>
+<META NAME="keywords" CONTENT="Department of Labor, DOL, Secretary of Labor" />
+<!-- begin dol-styles.shtm -->
+<link rel="shortcut icon" href="http://www.dol.gov/favicon.ico" type="image/x-icon">
+<link rel="icon" href="http://www.dol.gov/favicon.ico" type="image/x-icon">
+<link href="http://www.dol.gov/dol.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="api.css" TYPE="text/css" />
+<link href="http://webapps.dol.gov/FSPublic/Content/W_Helpful.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+caption {text-align:left; font-size:80%}
+table{margin-left:12px;}
+
+
+-->
+</style>
+
+<!-- end dol-styles.shtm -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script type="text/javascript" src="prettify.js"></script>
+<script language="JavaScript" type="text/javascript">
+
+	jQuery(document).ready(function(){
+
+		// This line of code makes code pretty to look at and understand.
+		window.prettyPrint && prettyPrint()
+	
+	});
+	
+
+
+</script>
+<!--start include header-dest-redesign3.shtm -->
+<script src="http://webapps.dol.gov/FSPublic/Scripts/W_Helpful.js" type="text/javascript"></script>
+<script type="text/javascript">
+		$(document).ready(function() {
+			W_Helpful.init('#fbcontent');
+		});
+</script> 
+</HEAD> 
+<BODY> 
+<a href="https://github.com/USDepartmentofLabor/ColdFusion-Federal-SDK"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+<div id="Main">
+	<!--Header Start -->
+    <a href="#pagecontent" class="skipster">Skip to page content</a>
+
+<div id="Header">
+    <div id="Banner">
+        <p class="banner"><a href="http://www.dol.gov">United States Department of Labor</a></p>
+    </div>
+		<div id="RightColumn"><table><tr><td valign="bottom">
+		
+			</td><td>
+            
+  
+ 
+ 
+ 
+            
+            
+          </td></tr>
+		  <tr><td colspan="2">
+			
+
+			</td></tr></table>
+		</div>
+	</div>
+    
+	<!--Header End -->
+
+	<!--Body Start -->
+	<div id="Body">
+		<div id="UtilityBar" class="tools">
+			<div class="utilitybarleft"><div id="agencyname">&nbsp;</div></div>
+
+			<!-- This is where the E-mail This page use to be -->
+			<div class="utilitybarright">
+				<div id="fbcontent" style="float:right"></div>			
+			</div>
+		</div>
+		<div class="crumb-links"><!-- begin crumb-nonav-auto.shtm -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
+  <TR>
+    <TD VALIGN="middle" ALIGN="LEFT" height="7" style="padding-left:2px"><span class="crumb-links">
+      <a href="http://www.dol.gov">DOL Home</a> &gt; <a href="http://www.dol.gov/open/">OPEN</a> &gt; <a href="http://developer.dol.gov">Developer Community</a> &gt; ColdFusion Federal Data SDK
+      </span> </td>
+
+  </tr>
+</table>
+<!-- end crumb-nonav-auto.shtm --></div>
+		<div id="content" >
+			<div id="pagecontent" style="width:768px;font-size:0;line-height:0;"></div>
+
+<!--end include header-dest-redesign3.shtm -->
+<!-- START CONTENT HERE  *************************************************** -->
+                <h1 class="title" id="page-title">ColdFusion Federal Data SDK</h1>
+
+<h2>Add the SDK file to your project</h2>
+<p>Extract the <a href="https://github.com/USDepartmentofLabor/ColdFusion-Federal-SDK/archive/master.zip">zipped SDK folder</a> or grab the<a href="https://github.com/USDepartmentofLabor/ColdFusion-Federal-SDK"> git repository</a>.</p>
+<p><span style="line-height: 1.6em;">Copy the folder into your project.</span></p>
+<p> </p>
+<h2>Using the SDK</h2>
+<h3>Create an SDK object in your source</h3>
+<p>The SDK is used in an object-oriented manner.  In your page, create an object from the SDKs CFC file:</p>
+<pre class="prettyprint" style="width:400px">
+&lt;cfscript&gt; objSDK = CreateObject("component", "gov.dol.govAPISDK.SDK");&lt;/cfscript&gt;</pre><h2><span style="line-height: 1.2em;">Making API </span><span style="line-height: 1.2em;">Calls</span></h2>
+<p>The SDK has three properties it uses to make your calls:</p>
+<ul><li>API_KEY = API key</li>
+<li>API_HOST = the host portion of the API's URL</li>
+<li>API_URL = the URL of the API (minus the host and the method/file)</li>
+</ul><p><span style="line-height: 1.6em;">The host, URL, and method/file are broken apart for easy reuse with consolidated and/or centralized APIs such as DOLs.</span></p>
+<p><span style="line-height: 1.6em;">Before you can make your call, you need to set the values for the three properties:</span></p>
+<pre class="prettyprint" style="width:400px">
+&lt;cfset objSDK.API_KEY = "{insert your key here}"&gt; &lt;cfset objSDK.API_HOST = "<a href="http://api.dol.gov" style="line-height: 1.6em;">http://api.dol.gov</a><span style="line-height: 1.6em;">"&gt; &lt;cfset objSDK.API_URL = "/V1"&gt;</span></pre><p><span style="line-height: 1.6em;">The example above uses DOL's API. Some federal APIs' URLs are structured differently. For example, let's look at </span><a href="http://business.usa.gov/api/article/xml" style="line-height: 1.6em;">http://business.usa.gov/api/article/xml</a></p>
+<ul><li>API_KEY = ""</li>
+<li>API_Host = "<a href="http://business.usa.gov">http://business.usa.gov</a>"</li>
+<li>API_URL = "/api/article/xml"</li>
+<li>method = "find"</li>
+</ul><p>Let's look at the Census Bureau. For example, <a href="http://api.census.gov/data/2010/acs5?key=%7byour">http://api.census.gov/data/2010/acs5?key={your</a> key}&amp;get=B02001_001E,NAME&amp;for=state:06,36</p>
+<ul><li>API_KEY = "YOUR_API_KEY"</li>
+<li>API_Host = "<a href="http://api.census.gov">http://api.census.gov</a>"</li>
+<li>API_URL = "/data/2010"</li>
+<li>method = "acs5"</li>
+</ul><p><span style="line-height: 1.6em;">Next, create a local variable with the name of the method or file you wish to invoke:</span></p>
+<pre class="prettyprint" style="width:400px">
+&lt;cfset API_METHOD = "DOLAgency/Agencies"&gt;</pre><p><span style="line-height: 1.6em;">Once you have done that, define the arguments you want to send the API in a struct.  For example:</span></p>
+<pre class="prettyprint" style="width:400px">
+&lt;cfset API_ARGUMENTS = structnew()&gt;
+&lt;cfset API_ARGUMENTS.filter = "Agency eq 'OSHA'"&gt;</pre><p>Now, all thats left is to call the API and get your results back.</p>
+<pre class="prettyprint" style="width:400px">
+&lt;cfscript&gt;myAPICall = objSDK.submitRequest(API_METHOD,API_ARGUMENTS);&lt;/cfscript&gt;</pre><p><span style="line-height: 1.6em;">As long as the data is returned as either JSON or XML, your data will be in the appropriate data type.  No deserialization should be needed.  Otherwise, you will receive the raw text back.</span></p>
+
+
+<!-- END CONTENT HERE  *************************************************** -->
+<!---original location of this file: "/includes/" -->
+
+</div><!--Body End -->
+
+ </div>
+
+	<!--Footer Start -->
+	<div id="Footer">
+		<div id="FooterMenu">
+			<div id="FooterMenuContainer">
+				<a href="http://www.dol.gov/dol/foia/main.htm">Freedom of Information Act</a>&nbsp;|&nbsp;
+
+				<a href="http://www.dol.gov/dol/privacynotice.htm">Privacy & Security Statement</a>&nbsp;|&nbsp;
+				<a href="http://www.dol.gov/dol/disclaim.htm">Disclaimers</a>&nbsp;|&nbsp;
+				<a href="http://webapps.dol.gov/feedback/FeedbackSurvey.aspx">Customer Survey</a>&nbsp;|&nbsp;
+				<a href="http://www.dol.gov/dol/aboutdol/website-policies.htm">Important Web Site Notices</a>&nbsp;|&nbsp;
+
+                <a href="http://www.dol.gov/dol/aboutdol/plug-ins.htm">Plug-ins Used by DOL</a>
+			</div>
+		</div>
+	
+		<div id="FooterContact">
+			<div id="FooterContactContainer">
+				U.S. Department of Labor&nbsp;|&nbsp;Frances Perkins Building, 200 Constitution Ave., NW, Washington, DC 20210<br>
+
+				<a href="http://www.dol.gov" style=" text-decoration: underline; ">www.dol.gov</a>&nbsp;|&nbsp;Telephone: 1-866-4-USA-DOL (1-866-487-2365)&nbsp;|&nbsp;TTY: 1-877-889-5627&nbsp;|&nbsp;<u><a href="http://www.dol.gov/dol/contact/index.htm">Contact Us</a></u>
+			</div>
+		</div>
+	</div>
+	<!--Footer End -->
+
+
+</div><!--Main End -->
+
+  </BODY>
+</HTML>

@@ -26,10 +26,12 @@
 				</cfloop>
 			</cfif>
 		<cfelseif THIS.API_HOST eq "http://data.dol.gov">
+			<cfif isdefined("arguments.API_ARGUMENTS")>
 				<cfloop collection=#arguments.API_ARGUMENTS# item="cmd">
 					<cfset THIS.argumentString = "#THIS.argumentString#/#LCase(cmd)#=#URLEncodedFormat(arguments.API_ARGUMENTS[cmd])#">
 					</cfif> 
 				</cfloop>
+			</cfif>
 		<cfelseif (THIS.API_HOST eq "http://api.census.gov") OR (THIS.API_HOST eq "http://pillbox.nlm.nih.gov")>
 			<!--- 
 			CENSUS.GOV

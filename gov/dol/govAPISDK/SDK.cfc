@@ -25,6 +25,11 @@
 					</cfif> 
 				</cfloop>
 			</cfif>
+		<cfelseif THIS.API_HOST eq "http://data.dol.gov">
+				<cfloop collection=#arguments.API_ARGUMENTS# item="cmd">
+					<cfset THIS.argumentString = "#THIS.argumentString#/#LCase(cmd)#=#URLEncodedFormat(arguments.API_ARGUMENTS[cmd])#">
+					</cfif> 
+				</cfloop>
 		<cfelseif (THIS.API_HOST eq "http://api.census.gov") OR (THIS.API_HOST eq "http://pillbox.nlm.nih.gov")>
 			<!--- 
 			CENSUS.GOV
@@ -71,6 +76,9 @@
 		<cfhttp url="#requestURL#" result="resultData">
 			<cfif THIS.API_HOST eq "http://api.dol.gov">
 				<cfhttpparam type="header" name="Accept" value="application/json">
+			</cfif>
+			<cfif THIS.API_HOST eq "http://data.dol.gov">
+				<cfhttpparam type="header" name="X-API-KEY" value="#THIS.API_KEY#">
 			</cfif>
 		</cfhttp>
 		<!--- determine the mime type of the response and deserialize if JSON --->
